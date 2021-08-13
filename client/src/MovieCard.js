@@ -6,7 +6,7 @@ import {Card,Button} from 'react-bootstrap'
 import {useState,useEffect} from "react"
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { deletepost, getotherprofile, updatepost } from './redux/actions/postActions';
+import { deletepost, getotherprofile, updatepost, vote } from './redux/actions/postActions';
 function MovieCard({src,name,rating,id,owner})
 {  
   const dispatch = useDispatch()
@@ -17,8 +17,9 @@ function fndelet()
   }
 
   const onStarClick=(nextValue, prevValue, name)=>{
-    dispatch(updatepost(id,{rating:nextValue}))
-    dispatch(getotherprofile(owner._id))
+    // rating=(rating+nextValue)/2
+    dispatch(vote(id,{rating:nextValue},owner._id))
+  
 
 
   }
@@ -45,7 +46,7 @@ function fndelet()
   <Button  className="deletebutton" variant="danger" onClick={fndelet}  >Delte</Button>
   
   
-   <Link to={`movie/${id}`} className="seemore"> <Button className="seemore1"  variant="primary"  >Watch the trailer</Button> </Link>
+   <Link to={`/movie/${id}`} className="seemore"> <Button className="seemore1"  variant="primary"  >Watch the trailer</Button> </Link>
   
 </Card>  
     

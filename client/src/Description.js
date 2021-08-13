@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useDispatch ,useSelector} from "react-redux";
 import StarRatingComponent from 'react-star-rating-component';
-import { updatepost } from './redux/actions/postActions';
+import { updatepost, vote } from './redux/actions/postActions';
 
 
 
@@ -29,7 +29,7 @@ import { updatepost } from './redux/actions/postActions';
 
      if(movie.find(elm=>elm._id===match.params.id)){
         var show=true
-    var {name,_id,trailer,description,rating}=movie.find(elm=>elm._id===match.params.id)
+    var {name,_id,trailer,description,rating,owner}=movie.find(elm=>elm._id===match.params.id)
     
      trailer=trailer.replace("watch?v=","embed/")
      trailer=extracting(trailer)
@@ -39,7 +39,7 @@ import { updatepost } from './redux/actions/postActions';
 
 
    const onStarClick=(nextValue, prevValue, name)=>{
-    dispatch(updatepost(_id,{rating:nextValue}))
+    dispatch(vote(_id,{rating:nextValue},owner._id))
 
   }
        

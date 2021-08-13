@@ -16,6 +16,8 @@ export const addPost = (newPost) => async (dispatch) => {
     
      dispatch(getPosts())
      dispatch(getMyPost())
+//     dispatch(getotherprofile(owner))      
+
 
     }
     catch (err) {
@@ -42,7 +44,7 @@ export const findposts = (info) => async (dispatch) => {
     }
 }
 
-export const updatepost = (id,info) => async (dispatch) => {
+export const updatepost = (id,info,owner) => async (dispatch) => {
     try {
         dispatch(startLoading("updating"))
         dispatch(clearError())
@@ -52,7 +54,25 @@ export const updatepost = (id,info) => async (dispatch) => {
     
      dispatch(getMyPost())
      dispatch(getPosts())
-           
+//     dispatch(getotherprofile(owner))      
+    }
+    catch (err) {
+        dispatch(stopLoading())
+        dispatch(setError(err.response.data.errors))
+    }
+}
+
+export const vote = (id,info,owner) => async (dispatch) => {
+    try {
+        dispatch(startLoading("updating"))
+        dispatch(clearError())
+        const token = localStorage.getItem('token')
+ 
+     const x = await axios.put(`${prefixe}/api/post/updatepost/${id}`, info,{headers:{"auth-token":token }})
+    
+     dispatch(getMyPost())
+     dispatch(getPosts())
+    dispatch(getotherprofile(owner))      
     }
     catch (err) {
         dispatch(stopLoading())

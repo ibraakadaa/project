@@ -34,3 +34,12 @@ display:flex;
   color:#0069D9;
   margin: 20px;
 }
+.centring{
+display :flex;
+justify-content: center!important;
+
+}
+.centringb{
+margin :50px !important;
+padding: 20px!important;
+}

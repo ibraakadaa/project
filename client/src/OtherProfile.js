@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MovieCard from './MovieCard'
 import { getotherposts, getotherprofile } from './redux/actions/postActions'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import {Button, Nav, Navbar, Form, FormControl,Dropdown,DropdownButton} from "react-bootstrap";
 import { logout } from './redux/actions/authActions';
@@ -12,7 +12,8 @@ import logo from "./logo.png"
 
 
 
-const OtherProfile = ({match,history}) => {
+const OtherProfile = ({match}) => {
+  const history = useHistory()
 
     var frating = 0;
     var searchname = "";
@@ -57,6 +58,7 @@ function updating() {
 
 
 const disconnect=()=>{
+  history.push('/')
     dispatch(logout())
   }
 

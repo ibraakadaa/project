@@ -4,7 +4,7 @@ import { getMyPost } from './redux/actions/postActions'
 import MovieCard from './MovieCard'
 import {Button, Nav, Navbar, Form, FormControl,Dropdown,DropdownButton} from "react-bootstrap";
 import AddMovie from "./AddMovie";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import { logout } from './redux/actions/authActions';
 
@@ -17,6 +17,8 @@ const Profile = () => {
     var searchname = "";
 const dispatch=useDispatch()
 const auth = useSelector(state => state.auth)
+const history = useHistory()
+
 
 const isLoading = useSelector(state => state.appState.isLoading)
 const myposts = useSelector(state => state.posts.myposts)
@@ -56,6 +58,7 @@ const [filtermovie, setfiltermovie] = useState(myposts);
 
 
 const disconnect=()=>{
+  history.push('/')
     dispatch(logout())
   }
 

@@ -109,7 +109,7 @@ useEffect(() => {
         
        
   <div className="movieflexing">
-       {!(isLoading.ref==="getotherposts")&&filtermovie.map((elm)=><MovieCard
+       {filtermovie.map((elm)=><MovieCard
     id={elm._id} rating={elm.rating}
    src={elm.image.url} name={ elm.name} owner={elm.owner} /> )
  

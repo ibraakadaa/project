@@ -13,7 +13,13 @@ var frating = 0;
 var searchname = "";
 const Filter = ({ movie}) => {
 
+
+
+
+
  const  dispatch= useDispatch()
+ const moviepost=useSelector(state=>state.posts.postList)
+
   const auth = useSelector(state => state.auth)
   const isLoading = useSelector(state => state.appState.isLoading)
    
@@ -24,7 +30,7 @@ const [filtermovie, setfiltermovie] = useState(movie);
   function updating() {
 
     setfiltermovie(
-      movie.filter(
+      moviepost.filter(
         (elm) =>
           elm.name.toLowerCase().includes(searchname.toLowerCase()) &&
           elm.rating >= frating
@@ -52,7 +58,7 @@ const [filtermovie, setfiltermovie] = useState(movie);
 
   useEffect(() => {
        updating()
-    },[movie])
+    },[moviepost])
 
     
 useEffect(()=>{

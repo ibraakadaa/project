@@ -9,6 +9,10 @@ const LoginPage = () => {
         email: "",
         password: ""
     })
+    const password_error = useSelector(state => state.appState.detail.password)
+    const email_error = useSelector(state => state.appState.detail.email)
+    const error = useSelector(state => state.appState.errors)
+    
 
     const password=useRef()
     const email=useRef()
@@ -36,8 +40,11 @@ const [passwordplaceholder, setpasswordplaceholder] = useState("")
     return (<div>
         <Form>
   <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" ref={email} placeholder="Enter email" />
+    <Form.Label className="space">Email address</Form.Label>
+    {email_error&&<Form.Label className={email_error?"reding":"blue"}>   {` : ${email_error} `}</Form.Label>}
+    {(error==="Please register before")&&<Form.Label className={"reding"}>   {` : ${error} `}</Form.Label>}
+
+    <Form.Control   isInvalid={(email_error||(error==="Please register before"))?true:false}  type="email" ref={email} placeholder="Enter email" />
     <Form.Text className="text-muted">
         {emailplaceholder} <br/>
       We'll never share your email with anyone else.
@@ -45,8 +52,12 @@ const [passwordplaceholder, setpasswordplaceholder] = useState("")
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" ref={password} placeholder="Password" />
+    <Form.Label className="space">Password</Form.Label>
+    {password_error&&<Form.Label className={password_error?"reding space":"blue"}>{` : ${password_error}`}</Form.Label>}
+    {(error==="wrong password")&&<Form.Label className={"reding"}>   {` : ${error} `}</Form.Label>}
+
+     
+    <Form.Control  isInvalid={(password_error||(error==="wrong password"))? true:false}   type="password" ref={password} placeholder="Password" />
   <Form.Text>
       {passwordplaceholder}
   </Form.Text>

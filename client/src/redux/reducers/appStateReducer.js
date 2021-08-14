@@ -1,7 +1,17 @@
 import { CLEAR_ERROR, SET_ERROR, START_LOADING, STOP_LOADING } from "../actions/appStateTypes"
 
 const initState = {
-    errors: null,
+ detail:{
+       password:"",
+       email:""
+       
+   } ,
+  
+       
+    errors: {
+        
+    },
+    
     isLoading: {
         state: false,
     },
@@ -22,7 +32,9 @@ const appStateReducer = (state = initState, { type, payload }) => {
         case SET_ERROR:
             return {
                 ...state,
-                errors: payload
+                errors: payload[0]?payload[0].msg:payload,
+                detail:{password:payload.password?payload.password.msg:"",
+                email:payload.email?payload.email.msg:""}
             }
         case CLEAR_ERROR:
             return {

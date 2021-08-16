@@ -4,10 +4,9 @@ import { GET_MY_POST_FAILED, GET_MY_POST_REQUEST, GET_MY_POST_SUCCESS } from "..
 const initState = {
     token: localStorage.getItem('token'),
     isAuth: Boolean(localStorage.getItem('isAuth')),
-    user: JSON.parse(localStorage.getItem('user')),
-    otheruser:{firstname:"",
-    lastname:"",
-        image:{url:""}}
+    user: JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')):
+    { _id:1,image:{url:""}},
+    otheruser:{firstname:"",lastname:"",image:{url:""}},
 }
 
 const authReducer = (state = initState, { type, payload }) => {

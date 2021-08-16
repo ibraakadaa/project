@@ -104,7 +104,7 @@ const disconnect=()=>{
             size={24}
             activeColor="#ffd700"
           />
-         {auth.user&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
+         {auth.isAuth&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
          &&<div><Link to="/profile"><img src={auth.user.image.url} alt="Avatar" class="avatar"/></Link>
          <Link to ="/profile"><div className="text-avatar"> {auth.user.lastname} {auth.user.firstname}</div></Link></div>}
          {auth.isAuth&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
@@ -121,7 +121,7 @@ const disconnect=()=>{
         </Form>
       </Navbar>
 
-      {auth.user&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
+      {auth.isAuth&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
          &&<AddMovie  ></AddMovie>}
      {<div className="movieflexing"> 
      {filtermovie.map((elm)=><MovieCard

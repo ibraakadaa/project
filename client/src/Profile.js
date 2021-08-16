@@ -59,8 +59,7 @@ function updating() {
   function handleChange(e)
   {
     setfile(e.target.files[0] )
-    if(file)
-    new Compressor(file, {
+    new Compressor(e.target.files[0], {
       quality: 0.8,
       success(result) {
           const reader = new FileReader()

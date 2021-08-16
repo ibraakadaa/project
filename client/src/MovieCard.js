@@ -41,7 +41,7 @@ function fndelet()
     </Card.Text>
   </Card.Body>
   <div className="flexing">
-  <StarRatingComponent value={rating} starCount={5} onStarClick={onStarClick} size={24} />
+  <StarRatingComponent name="rating" value={rating} starCount={5} onStarClick={onStarClick} size={24} />
   </div>
   <Button  className="deletebutton" variant="danger" onClick={fndelet}  >Delte</Button>
   

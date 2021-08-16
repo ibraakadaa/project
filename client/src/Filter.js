@@ -1,11 +1,12 @@
 import { useState,useEffect } from "react";
-import MovieList from "./MovieList";
+
 import ReactStars from "react-rating-stars-component";
 import {Button, Nav, Navbar, Form, FormControl,Dropdown,DropdownButton} from "react-bootstrap";
 import AddMovie from "./AddMovie";
 import { useDispatch ,useSelector} from "react-redux";
 import {logout} from "./redux/actions/authActions"
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import MovieCard from "./MovieCard";
 
 
 
@@ -13,14 +14,14 @@ var frating = 0;
 var searchname = "";
 const Filter = ({ movie}) => {
 
+  const history = useHistory()
 
 
 
 
  const  dispatch= useDispatch()
  const moviepost=useSelector(state=>state.posts.postList)
-
-  const auth = useSelector(state => state.auth)
+ const auth = useSelector(state => state.auth)
   const isLoading = useSelector(state => state.appState.isLoading)
    
 
@@ -65,6 +66,12 @@ useEffect(()=>{
   
 },[auth.isAuth])
 
+useEffect(() => {
+
+  history.push('/')
+
+  
+}, [])
 
 const disconnect=()=>{
   dispatch(logout())
@@ -116,12 +123,22 @@ const disconnect=()=>{
 
       {auth.user&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
          &&<AddMovie  ></AddMovie>}
-     
-      <MovieList
-        movie={filtermovie}
-      />
+     {<div className="movieflexing"> 
+     {filtermovie.map((elm)=><MovieCard
+  key={elm._id}
+  id={elm._id} rating={elm.rating}
+   src={elm.image.url} name={ elm.name}
+   owner={elm.owner} /> )}  </div>
+  }
+
     </div></div> 
   );
 };
+
+
+
+/* {!(isLoading.ref="")&&<MovieList
+        movie={filtermovie}
+      />} */
 
 export default Filter;

@@ -85,7 +85,6 @@ const getMyPosts = async (req, res) => {
 
 const getotherposts = async (req, res) => {
     try {
-        console.log(typeof(req.params.info))
 
         const posts = await Post.find({ owner: req.params.id }).populate({ path: 'owner', select: "firstname image lastname email _id role " })
 

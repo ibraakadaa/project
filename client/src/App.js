@@ -6,7 +6,7 @@ import './App.css';
 import AddMovie from './AddMovie'
 import Filter from './Filter'
 import Description from './Description';
-import {Route} from "react-router-dom"
+import {Route, Switch} from "react-router-dom"
 import LoginPage from "./LoginPage"
 import Profile from "./Profile"
 import   Signuppage from"./Signuppage"
@@ -34,17 +34,17 @@ dispatch(getPosts())
     
     <div>
     <div>
-
+<Switch>
 <Route exact path="/register" render={(props)=><  Signuppage {...props}     />  }/>
 
         <Route exact path="/login" render={(props)=><LoginPage   {...props}     />  }/>
 
     
    {auth.isAuth&&<Route exact path="/profile" render={(props)=><Profile      />  }/>}
-       {<Route exact path="/" render={(props)=><Filter   {...props}     movie={moviepost}         />} />
-  }
   {!(isLoading.ref==="GetPosts")&&!(isLoading.ref==="GetMyPosts")&&!(isLoading.ref==="getotherposts")&&<Route   path="/movie/:id" render={(props)=><Description     {...props}  movie={moviepost}      />   } />}
-  <Route   path="/other/:id" render={(props)=><OtherProfile     {...props}  movie={moviepost}      /> } />
+  <Route exact  path="/other/:id" render={(props)=><OtherProfile     {...props}  movie={moviepost}      /> } />
+       {<Route path="/" render={(props)=><Filter   {...props}     movie={moviepost}         />} />}
+  </Switch>
     </div>
     </div>
   );

@@ -16,7 +16,6 @@ export const addPost = (newPost) => async (dispatch) => {
     
      dispatch(getPosts())
      dispatch(getMyPost())
-//     dispatch(getotherprofile(owner))      
 
 
     }
@@ -54,7 +53,8 @@ export const updatepost = (id,info,owner) => async (dispatch) => {
     
      dispatch(getMyPost())
      dispatch(getPosts())
-//     dispatch(getotherprofile(owner))      
+    dispatch(getotherprofile(owner))    
+     dispatch(stopLoading())  
     }
     catch (err) {
         dispatch(stopLoading())
@@ -72,7 +72,9 @@ export const vote = (id,info,owner) => async (dispatch) => {
     
      dispatch(getMyPost())
      dispatch(getPosts())
-    dispatch(getotherprofile(owner))      
+    dispatch(getotherprofile(owner))  
+   //focus
+    dispatch(stopLoading())    
     }
     catch (err) {
         dispatch(stopLoading())

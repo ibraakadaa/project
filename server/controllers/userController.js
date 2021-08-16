@@ -83,6 +83,40 @@ const getUserProfile = async (req, res) => {
         res.status(500).json({ errors: [{ msg: err.message }] })
     }
 }
+const getotheruser = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id:req.params.id })
+          res.json(user)
+    }
+    catch (err) {
+        res.status(500).json({ errors: [{ msg: err.message }] })
+        console.log("error from getotheruser",err.message)
+    }
+}
+const updatingprofileimage =async(req,res)=>{
+  
+    try {  const image=req.body.image
+        if (image) {
+            const savedImage = await cloudinary.uploader.upload(image, {
+                timeout: 60000,
+                upload_preset: "Movie"
+            })
+            newimage = {
+                url: savedImage.url,
+                public_id: savedImage.public_id
+            }
+
+       
+        const updatedprofile = await User.findByIdAndUpdate(req.userId, {image:newimage })
+        res.json(updatedprofile)
+         }}
+    catch (err) {
+        res.status(400).json({ errors: [{ msg: err.message }] })
+    
+
+}}
 
 
-module.exports = { register, login, getUserProfile }
+ 
+
+module.exports = { updatingprofileimage,register, login, getotheruser,getUserProfile }  

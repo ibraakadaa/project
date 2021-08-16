@@ -5,7 +5,7 @@ import { getotherposts, getotherprofile } from './redux/actions/postActions'
 import { Link, useHistory } from "react-router-dom";
 
 import {Button, Nav, Navbar, Form, FormControl,Dropdown,DropdownButton} from "react-bootstrap";
-import { logout } from './redux/actions/authActions';
+import { getotheruser, logout } from './redux/actions/authActions';
 import ReactStars from "react-rating-stars-component";
 import AddMovie from './AddMovie';
 import logo from "./logo.png"
@@ -21,11 +21,13 @@ const dispatch = useDispatch()
 const isLoading = useSelector(state => state.appState.isLoading)
 const o = useSelector(state => state.posts.o)
 const auth = useSelector(state => state.auth) 
+const error = useSelector(state => state.appState.errors)
+
 const [filtermovie, setfiltermovie] = useState(o);
 
 function updating() {
-
-    setfiltermovie(
+  if(!(isLoading.ref==="getotherposts"))
+  setfiltermovie(
         o.filter(
         (elm) =>
           elm.name.toLowerCase().includes(searchname.toLowerCase()) &&
@@ -33,7 +35,7 @@ function updating() {
       )
     );
   }
- 
+ //console.log("i'ts runnig ")
   
 
   function Filtermovie(e) {
@@ -66,7 +68,10 @@ const disconnect=()=>{
 useEffect(() => {
 
  dispatch(getotherprofile(match.params.id))
+ dispatch(getotheruser(match.params.id))
 }, [])
+
+
 
     return ( <div>        <Navbar bg="dark" variant="dark">
         <Link to ="/">
@@ -106,17 +111,25 @@ useEffect(() => {
         
         </Form>
         </Navbar>
-        
+        {(error==="Cast to ObjectId failed for value \""+`${match.params.id}`+"\" (type string) at path \"_id\" for model \"user\"")&&<div class="error">User d'ont exist <div><Link to ="/"><Button>go back to home page</Button></Link></div> </div>}
+       {!(error==="Cast to ObjectId failed for value \""+`${match.params.id}`+"\" (type string) at path \"_id\" for model \"user\"")&&<div className="profile"> <div>
+
+          {<img src={auth.otheruser.image.url} ></img>} 
+        <div className="ecriture" >{`${auth.otheruser.firstname} ${auth.otheruser.lastname}`} </div>
+          </div>  </div>}
        
-        
-       
-  <div className="movieflexing">
-       {filtermovie.map((elm)=><MovieCard
-    id={elm._id} rating={elm.rating}
-   src={elm.image.url} name={ elm.name} owner={elm.owner} /> )
+       {<div className="movieflexing">
+   
+       {filtermovie.map((elm)=><MovieCard 
+    key={elm._id}
+  id={elm._id} rating={elm.rating}
+   src={elm.image.url} name={ elm.name}
+   owner={elm.owner} /> )}
  
 
-       }</div>
+  
+       </div>
+       }
 
 
        </div>

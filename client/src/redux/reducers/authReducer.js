@@ -1,10 +1,13 @@
-import { GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS } from "../actions/authTypes"
+import { GET_OTHER_SUCCESS, GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS } from "../actions/authTypes"
 import { GET_MY_POST_FAILED, GET_MY_POST_REQUEST, GET_MY_POST_SUCCESS } from "../actions/postTypes"
 
 const initState = {
     token: localStorage.getItem('token'),
     isAuth: Boolean(localStorage.getItem('isAuth')),
     user: JSON.parse(localStorage.getItem('user')),
+    otheruser:{firstname:"",
+    lastname:"",
+        image:{url:""}}
 }
 
 const authReducer = (state = initState, { type, payload }) => {
@@ -25,6 +28,16 @@ const authReducer = (state = initState, { type, payload }) => {
                 user: payload
                 
             }
+        case GET_OTHER_SUCCESS:
+            return{
+                ...state,
+                otheruser:{
+                    firstname:payload.firstname,
+                    lastname:payload.lastname,
+                    image:{url:payload.image.url}}
+            }
+
+
         case LOGOUT:
             localStorage.clear()
             return {

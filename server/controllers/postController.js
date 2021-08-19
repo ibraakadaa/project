@@ -107,6 +107,7 @@ const deletePost = async (req, res) => {
 }
 const updatePost = async (req, res) => {
     try {
+        console.log(" info ",req.body)
         const updatedPost = await Post.findByIdAndUpdate(req.params.id, { ...req.body })
         res.json(updatedPost)
     }

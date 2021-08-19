@@ -49,16 +49,21 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    try {
+    const { email, password } = req.body;
+    console.log("email is ",req.body.email)
+    try { console.log("we are there1")
         const errors = validationResult(req)
         if (!errors.isEmpty())
             return res.status(400).json({ errors: errors.mapped() })
-        const { email, password } = req.body;
-        const user = await User.findOne({ email })
+
+        const user = await User.findOne({ email:email })
         if (!user)
-            return res.status(404).json({ errors: [{ msg: 'Please register before' }] })
+           { console.log("we are there2")
+           console.log(user)
+            return res.status(404).json({ errors: [{ msg: 'Please register before' }] })}
+
         if (user.isBanned) {
-            return res.status(401).json({ err: "YOU ARE BANNED" })
+            return res.status(401).json({ err: "YOU ARE BANNED" })  
         }
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch)
@@ -116,7 +121,15 @@ const updatingprofileimage =async(req,res)=>{
 
 }}
 
-
+const alluser =async(req,res)=>{
+try {
+    const users = await User.find()
+    res.json(users)
+} catch (err) {
+    res.status(400).json({ errors: [{ msg: err.message }] })
+    
+}
+}
  
 
-module.exports = { updatingprofileimage,register, login, getotheruser,getUserProfile }  
+module.exports = { updatingprofileimage,register, login, getotheruser,getUserProfile,alluser }  

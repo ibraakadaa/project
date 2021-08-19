@@ -2,11 +2,11 @@ import { GET_OTHER_SUCCESS, GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE
 import { GET_MY_POST_FAILED, GET_MY_POST_REQUEST, GET_MY_POST_SUCCESS } from "../actions/postTypes"
 
 const initState = {
+    statepayload:null,
     token: localStorage.getItem('token'),
     isAuth: Boolean(localStorage.getItem('isAuth')),
-    user: JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')):
-    { _id:1,image:{url:""}},
     otheruser:{firstname:"",lastname:"",image:{url:""}},
+    user: JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')):{ _id:1,firstname:"",lastname:"",image:{url:""}}
 }
 
 const authReducer = (state = initState, { type, payload }) => {
@@ -21,12 +21,14 @@ const authReducer = (state = initState, { type, payload }) => {
                 token: payload.token
             }
         case GET_PROFILE_SUCCESS:
-            localStorage.setItem('user', JSON.stringify(payload))
-            return {
+           {
+           localStorage.setItem('user', JSON.stringify(payload))
+            return {statepayload:payload,
                 ...state,
                 user: payload
                 
             }
+        }
         case GET_OTHER_SUCCESS:
             return{
                 ...state,

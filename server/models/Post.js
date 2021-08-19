@@ -4,7 +4,7 @@ const postSchema = mongoose.Schema({
     description: String,
     owner: {
         type: mongoose.Types.ObjectId,
-        ref: 'user'
+        ref: 'person'
     },
     isValidate: {
         type: Boolean,

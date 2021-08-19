@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from './redux/actions/authActions';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Compressor from 'compressorjs'
 
 import {Form,Button,Modal,InputGroup,FormControl} from 'react-bootstrap'
@@ -139,6 +139,10 @@ const [passwordplaceholder, setpasswordplaceholder] = useState("")
   <Form.Group className="mb-3" controlId="formBasicCheckbox">
   <div className="centring" ><Button className="centringb" variant="success"   onClick ={addhandlechange}  >Upload a your image</Button>  </div>
   <div className="centring" ><Button className="centringb"  onClick={handleSubmit} variant="primary" type="submit">REGISTER</Button></div>
+  <Link to="/" ><div className="centring" ><Button className="centringb"   variant="info" type="submit">Home</Button></div></Link>
+  <Link to="/login" ><div className="centring" ><Button className="centringb"   variant="danger" type="submit">Login</Button></div></Link>
+
+
   </Form.Group>
 
   

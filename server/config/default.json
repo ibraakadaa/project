@@ -1,6 +1,6 @@
 {
     "DB_URI":{
-        "URI":"mongodb+srv://Ibrahim:ibrahim1234@cluster0.wekok.mongodb.net/checkpointmongoose?retryWrites=true&w=majority"
+        "URI":"mongodb+srv://Ibrahim:ibrahim1234@cluster0.wekok.mongodb.net/project?retryWrites=true&w=majority"
     },
     "SERVER_CONFIG":{
         "PORT":5000

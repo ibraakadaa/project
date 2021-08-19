@@ -12,15 +12,22 @@ export const login = (info) => async (dispatch) => {
     dispatch(clearError())
     dispatch(startLoading("Login"))
     try {
-        const res = await axios.post(`${prefixe}/api/user/login`, info)
+        console.log("frommmmmm",info)
+     //   const res = await axios.get(`${prefixe}/api/user/log`,{params:{...info}})
+        const res = await axios.post(`${prefixe}/api/user/log`,info)
+        
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
         })
         dispatch(stopLoading())
         dispatch(getProfile())
+        console.log("login")
     } catch (err) {
-        dispatch(setError(err.response.data.errors))
+        if(!err)
+        err={response:{data:{errors:"bad"}}}
+       // dispatch(setError(err.response.data.errors))
+       console.log(err.message)
         dispatch(stopLoading())
     }
 }
@@ -54,7 +61,7 @@ export const getProfile = () => async (dispatch) => {
             payload: data
         })
    
-        dispatch(stopLoading())
+     dispatch(stopLoading())
 
    
 

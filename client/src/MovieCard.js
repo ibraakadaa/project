@@ -29,6 +29,7 @@ function fndelet()
     return( <div  >
     <Card className="moviecard" style={{ width: '18rem' }}>
   <Card.Img variant="top" src={src}  style={{ width: '18rem' , height:"20rem"}} />
+  
   <Card.Body>
     <Card.Title>{name}</Card.Title>
     <Card.Text>
@@ -36,8 +37,8 @@ function fndelet()
     <br></br>
     <br></br>
    <Link to ={`/other/${owner._id}`} > <img className="avatar" src={owner.image.url}/></Link>
-    
-    <Link to={`/other/${owner._id}`} > <span className="textt">{owner.firstname} {owner.lastname}</span></Link>
+   <br></br>      
+  <Link to={`/other/${owner._id}`} > <span className="textt">{owner.firstname} {owner.lastname}</span></Link>
     </Card.Text>
   </Card.Body>
   <div className="flexing">

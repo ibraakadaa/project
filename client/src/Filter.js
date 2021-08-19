@@ -105,8 +105,8 @@ const disconnect=()=>{
             activeColor="#ffd700"
           />
          {auth.isAuth&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
-         &&<div><Link to="/profile"><img src={auth.user.image.url} alt="Avatar" class="avatar"/></Link>
-         <Link to ="/profile"><div className="text-avatar"> {auth.user.lastname} {auth.user.firstname}</div></Link></div>}
+         &&<div><Link to="/profile"><img src={auth.user && auth.user.image.url} alt="Avatar" class="avatar"/></Link>
+         <Link to ="/profile"><div className="text-avatar"> {auth.user && auth.user.lastname} {auth.user && auth.user.firstname}</div></Link></div>}
          {auth.isAuth&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
          &&<DropdownButton id="dropdown-basic-button" title="Compte">
   <Dropdown.Item  onClick={disconnect}>disconnect</Dropdown.Item>

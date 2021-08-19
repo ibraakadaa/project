@@ -23,9 +23,9 @@ const o = useSelector(state => state.posts.o)
 const auth = useSelector(state => state.auth) 
 const error = useSelector(state => state.appState.errors)
 
-if(auth)
-if(auth.user._id===match.params.id)
-history.push('/profile')
+if(auth.isAuth)
+{if(auth.user._id===match.params.id)
+history.push('/profile')}
 
 
 
@@ -102,7 +102,7 @@ useEffect(() => {
             activeColor="#ffd700"
           />
          {auth.isAuth&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
-         &&<div><Link to="/profile"><img src={auth.user.image.url===""} alt="Avatar" class="avatar"/></Link>
+         &&<div><Link to="/profile">{!(auth.user.image.url==="")&&<img src={auth.user.image.url} alt="Avatar" class="avatar"/>}</Link>
          <Link to ="/profile"><div className="text-avatar"> {auth.user.lastname} {auth.user.firstname}</div></Link></div>}
          {auth.isAuth&&!(isLoading.ref==="signup")&&!(isLoading.ref==="Login")&&!(isLoading.ref==="Getmyprofile")
          &&<DropdownButton id="dropdown-basic-button" title="Compte">

@@ -68,16 +68,17 @@ export const vote = (id,info,owner) => async (dispatch) => {
         dispatch(clearError())
         const token = localStorage.getItem('token')
  
-     const x = await axios.put(`${prefixe}/api/post/updatepost/${id}`, info,{headers:{"auth-token":token }})
-    
+     const x = await axios.put(`${prefixe}/api/post/vote/${id}`, info,{headers:{"auth-token":token }})
+     
      dispatch(getMyPost())
      dispatch(getPosts())
     dispatch(getotherprofile(owner))  
    //focus
-    dispatch(stopLoading())    
+    //dispatch(stopLoading())    
     }
     catch (err) {
         dispatch(stopLoading())
+        console.log(err)
         dispatch(setError(err.response.data.errors))
     }
 }
